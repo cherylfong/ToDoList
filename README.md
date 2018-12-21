@@ -24,6 +24,12 @@ An android app that allows adding a list item and offers basic functionality suc
 
 <img src="/todolist-demo.gif" width="" alt="To Do List App Demo." />
 
+## Notes
+
+Hours spent: 1-2 hrs
+
+There were no significant challenges that I've encountered up to this point in building this applicantion. I did find this [blog](https://blog.cindypotvin.com/saving-data-to-a-file-in-your-android-application/) useful in helping me understand caching files in the internal memory of an app and in implementing persistence using this method.
+
 
 ## License
 
