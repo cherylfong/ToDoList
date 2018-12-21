@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(itemsAdapter);
 
         // dummy data
-        items.add("fish");
-        items.add("veggies");
-        items.add("milk");
-        items.add("fruits");
+//        items.add("fish");
+//        items.add("veggies");
+//        items.add("milk");
+//        items.add("fruits");
 
         setListViewListener();
 
