@@ -22,12 +22,12 @@ An android app that allows adding a list item and offers basic functionality suc
 
 ## App Demo
 
-<img src="" width="" alt="To Do List App Demo." />
+<img src="/todolist-demo.gif" width="" alt="To Do List App Demo." />
 
 
 ## License
 
-    Copyright 2018 cheryl Fong
+    Copyright 2018 Cheryl Fong
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
