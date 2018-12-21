@@ -1,5 +1,7 @@
 package com.cherylfong.todolist;
 
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> itemsAdapter;
     ListView listView;
 
+    private int index;
+
     static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         setListViewListener();
 
+        index=0;
+
     }
 
     public void onAddItem(View view){
@@ -55,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         // save items to the file
         writeItems();
         editTextNewItem.setText(""); // clear
-        Toast.makeText(getApplicationContext(), "New item added.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "New to do item added.", Toast.LENGTH_SHORT).show();
     }
 
     private void setListViewListener(){
@@ -72,6 +78,27 @@ public class MainActivity extends AppCompatActivity {
 
                 writeItems();
                 return true;
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Log.d(LOG_TAG, "onItemClick edit item " + position );
+
+                String editToDoString = items.get(position);
+
+                Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
+                Bundle mBundle = new Bundle();
+
+                mBundle.putString("toDoValue", editToDoString);
+                index = position;
+
+                intent.putExtras(mBundle);
+
+                startActivityForResult(intent, 200);
+
             }
         });
     }
@@ -111,6 +138,30 @@ public class MainActivity extends AppCompatActivity {
 
         }catch (IOException e){
             Log.e(LOG_TAG, "ERROR write to file:" + e.getMessage());
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(resultCode == RESULT_OK){
+
+            if(requestCode == 200){
+
+                String newValue = data.getExtras().getString("newValue");
+
+                itemsAdapter.insert(newValue, index);
+                items.remove(index+1);
+                itemsAdapter.notifyDataSetChanged();
+
+                // save items to the file
+                writeItems();
+
+                Toast.makeText(getApplicationContext(), "To do item saved.", Toast.LENGTH_SHORT).show();
+
+            }
+
+
         }
     }
 }
